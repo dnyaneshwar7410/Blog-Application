@@ -121,4 +121,4 @@ STATICFILES_DIRS = ['blog_main/static']
 
 
 MEDIA_URL = '/media/'
-MEDIAL_ROOT = BASE_DIR /'media'
+MEDIA_ROOT = BASE_DIR /'media'
