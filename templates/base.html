@@ -16,6 +16,7 @@
       rel="stylesheet"
     />
     <link href="{% static 'css/blog.css' %}" rel="stylesheet" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css" integrity="sha512-2SwdPD6INVrV/lHTZbO2nodKhrnDdJK9/kg2XD1r9uGqPo1cUbujc+IYdlYdEErWNu69gVcYgdxlmVmzTWnetw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
   </head>
   <body>
     <div class="container">
@@ -39,7 +40,7 @@
             <a class="btn btn-sm btn-warning" href="{% url 'login' %}">Sign In</a> &nbsp;
             <a class="btn btn-sm btn-outline-secondary" href="{% url 'register' %}">Register</a>
             {% else %}
-            <span>You are logged in as {{user}}</span> &nbsp;&nbsp;&nbsp;
+            <span><a href="{% url 'dashboard' %}" class='btn btn-warning'>Dashboard</a></span> &nbsp;&nbsp;&nbsp;
             <span><a href="{% url 'logout' %}" class='btn btn-danger'>Logput</a></span>
             {% endif %}
           </div>
