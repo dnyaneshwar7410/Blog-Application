@@ -16,37 +16,65 @@
       rel="stylesheet"
     />
     <link href="{% static 'css/blog.css' %}" rel="stylesheet" />
+    <link href="{% static 'css/dashboard.css' %}" rel="stylesheet" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css" integrity="sha512-2SwdPD6INVrV/lHTZbO2nodKhrnDdJK9/kg2XD1r9uGqPo1cUbujc+IYdlYdEErWNu69gVcYgdxlmVmzTWnetw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 
   </head>
   <body>
     <div class="container">
-      <header class="blog-header py-3">
-        <div class="row flex-nowrap justify-content-between align-items-center">
-          <div class="col-4 pt-1">
-            <a class="blog-header-logo text-dark" href="/">Django Blog</a>
+     <header class="blog-header py-3 border-bottom">
+  <div class="container">
+    <div class="row align-items-center">
+
+      <!-- Logo -->
+      <div class="col-12 col-md-4 text-center text-md-start mb-2 mb-md-0">
+        <a class="blog-header-logo text-dark text-decoration-none fs-4" href="/">
+          Django Blog
+        </a>
+      </div>
+
+      <!-- Search -->
+      <div class="col-12 col-md-4 mb-2 mb-md-0">
+        <form action="{% url 'search' %}" method="GET">
+          <div class="input-group">
+            <input 
+              class="form-control"
+              value="{{keyword}}"
+              type="text"
+              name="keyword"
+              placeholder="Enter search term..."
+              required
+            />
+            <button type="submit" class="btn btn-primary">
+              Go
+            </button>
           </div>
-          <div class='col-4'>
-            <form action="{% url 'search' %}" method='GET'>
-              
-                    <div class="input-group">
-                        <input class="form-control" value="{{keyword}}" type="text" name='keyword' placeholder="Enter search term..." aria-label="Enter search term..." aria-describedby="button-search" required />
-                        <button type='submit' class="btn btn-primary" id="button-search" type="button">Go!</button>
-                    </div>
-              
-            </form>
-          </div>
-          <div class="col-4 d-flex justify-content-end align-items-center">
-            {% if not user.is_authenticated %}
-            <a class="btn btn-sm btn-warning" href="{% url 'login' %}">Sign In</a> &nbsp;
-            <a class="btn btn-sm btn-outline-secondary" href="{% url 'register' %}">Register</a>
-            {% else %}
-            <span><a href="{% url 'dashboard' %}" class='btn btn-warning'>Dashboard</a></span> &nbsp;&nbsp;&nbsp;
-            <span><a href="{% url 'logout' %}" class='btn btn-danger'>Logout</a></span>
-            {% endif %}
-          </div>
-        </div>
-      </header>
+        </form>
+      </div>
+
+      <!-- Auth Buttons -->
+      <div class="col-12 col-md-4 text-center text-md-end">
+        {% if not user.is_authenticated %}
+          <a class="btn btn-sm btn-warning mx-3" href="{% url 'login' %}">
+            Sign In
+          </a>
+          <a class="btn btn-sm btn-outline-secondary" href="{% url 'register' %}">
+            Register
+          </a>
+        {% else %}
+          <a href="{% url 'dashboard' %}" class="btn btn-sm btn-warning mx-3">
+            Dashboard
+          </a>
+          <a href="{% url 'logout' %}" class="btn btn-sm btn-danger mx-3">
+            Logout
+          </a>
+        {% endif %}
+      </div>
+
+    </div>
+  </div>
+</header>
+
 
       <div class="nav-scroller py-1 mb-2">
         <nav class="nav d-flex justify-content-between">
@@ -66,5 +94,7 @@
       <p>Django blog built with ❤️ by <a href="#">Dnyaneshwar Parkhe</a></p>
     </footer>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+
   </body>
 </html>

@@ -1,28 +1,47 @@
-<div class="col-md-3">
-  <div class="nav flex-column nav-pills bg-light" aria-orientation="vertical">
-    <a
-      href="{% url 'dashboard' %}"
-      class="nav-link text-dark {% if '/dashboard/' == request.path %} bg-warning {% endif %}"
-      >Dashboard</a
-    >
-    {% if perms.auth.view_user %}
-    <a
-      href="{% url 'users' %}"
-      class="nav-link text-dark {% if '/users/' in request.path %} bg-warning {% endif %}"
-      >Users</a
-    >
-    {% endif %}
-    <a
-      href="{% url 'categories' %}"
-      class="nav-link text-dark {% if '/dashboard/categories/' == request.path %} bg-warning {% endif %}"
-      >Categories</a
-    >
-    <a
-      href="{% url 'posts' %}"
-      class="nav-link text-dark {% if '/dashboard/posts/' == request.path %} bg-warning {% endif %}"
-      >Posts</a
-    >
+<!-- Sidebar -->
+<div class="col-12 col-md-3 mb-3">
 
-    <a href="" class="nav-link text-dark">Logout</a>
+  <!-- Toggle Button (Mobile Only) -->
+  <button class="btn btn-dark d-md-none mb-2"
+          type="button"
+          data-bs-toggle="collapse"
+          data-bs-target="#sidebarMenu">
+    ☰ Menu
+  </button>
+
+  <!-- Sidebar Content -->
+  <div class="collapse d-md-block" id="sidebarMenu">
+    <div class="nav flex-column nav-pills bg-light p-3 rounded shadow-sm">
+
+      <a href="{% url 'dashboard' %}"
+         class="nav-link text-dark {% if request.path == '/dashboard/' %} bg-warning active {% endif %}">
+         Dashboard
+      </a>
+
+      {% if perms.auth.view_user %}
+      <a href="{% url 'users' %}"
+         class="nav-link text-dark {% if '/users/' in request.path %} bg-warning active {% endif %}">
+         Users
+      </a>
+      {% endif %}
+
+      <a href="{% url 'categories' %}"
+         class="nav-link text-dark {% if '/dashboard/categories/' in request.path %} bg-warning active {% endif %}">
+         Categories
+      </a>
+
+      <a href="{% url 'posts' %}"
+         class="nav-link text-dark {% if '/dashboard/posts/' in request.path %} bg-warning active {% endif %}">
+         Posts
+      </a>
+
+      <hr>
+
+      <a href="{% url 'logout' %}" class="nav-link text-danger">
+         Logout
+      </a>
+
+    </div>
   </div>
+
 </div>

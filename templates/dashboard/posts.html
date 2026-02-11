@@ -1,65 +1,100 @@
-{% extends 'base.html' %} {% block content %}
+{% extends 'base.html' %}
+{% block content %}
 
-<div class="row">
-  <!-- Left Side bar -->
-  <!-- Load the side bar here -->
-  {% include "dashboard/sidebar.html" %}
+<div class="container-fluid">
+  <div class="row">
 
-  <!-- Right side content -->
-  <div class="col-md-9">
-    {% if perms.blogs.view_blog %}
-    <h2>All Posts</h2>
+    <!-- Sidebar -->
+    {% include "dashboard/sidebar.html" %}
 
-    {% if messages %} {% for message in messages %}
-    <div class="alert alert-danger" role="alert">{{ message }}</div>
-    {% endfor %} {% endif %}
+    <!-- Right side content -->
+    <div class="col-12 col-md-9 p-3">
 
-    <a
-      href="{% url 'add_post' %}"
-      class="btn btn-dark text-light float-right mb-2"
-      >Add New Post</a
-    >
-    <table class="table table-hover">
-      <thead>
-        <tr>
-          <th scope="col">Sr.No</th>
-          <th scope="col">Title</th>
-          <th scope="col">Category</th>
-          <th scope="col">Author</th>
-          <th scope="col">Status</th>
-          <th scope="col">Featured</th>
-          <th scope="col">Action</th>
-        </tr>
-      </thead>
-      <tbody>
-        {% for post in posts %}
-        <tr>
-          <th>{{forloop.counter}}</th>
-          <td>{{post.title}}</td>
-          <td>{{post.category.category_name}}</td>
-          <td>{{post.author}}</td>
-          <td>{{post.status}}</td>
-          <td>
-            {% if post.is_featured %}<i class="fas fa-check text-success"></i>
-            {% else %}<i class="fas fa-times text-danger"></i>{% endif %}
-          </td>
-          <td>
-            <a href="{% url 'edit_post' post.id %}"
-              ><i class="fas fa-edit text-success"></i>
-            </a>
-            &nbsp; &nbsp;
-            <a href="{% url 'delete_post' post.id %}">
-              <i class="fas fa-trash text-danger"></i>
-            </a>
-          </td>
-        </tr>
+      {% if perms.blogs.view_blog %}
+
+      <!-- Header Section -->
+      <div class="d-flex flex-column flex-md-row justify-content-between align-items-md-center mb-3">
+        <h2 class="mb-2 mb-md-0">All Posts</h2>
+
+        <a href="{% url 'add_post' %}"
+           class="btn btn-dark">
+           Add New Post
+        </a>
+      </div>
+
+      <!-- Messages -->
+      {% if messages %}
+        {% for message in messages %}
+          <div class="alert alert-danger alert-dismissible fade show" role="alert">
+            {{ message }}
+            <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+          </div>
         {% endfor %}
-      </tbody>
-    </table>
-     {% else %}
-  <h5 class='text-danger'>You cant see this page</h5>
-  {% endif %}
+      {% endif %}
+
+      <!-- Responsive Table -->
+      <div class="table-responsive">
+        <table class="table table-hover align-middle">
+          <thead class="table-dark">
+            <tr>
+              <th>Sr.No</th>
+              <th>Title</th>
+              <th>Category</th>
+              <th>Author</th>
+              <th>Status</th>
+              <th>Featured</th>
+              <th>Action</th>
+            </tr>
+          </thead>
+
+          <tbody>
+            {% for post in posts %}
+            <tr>
+              <td>{{ forloop.counter }}</td>
+              <td class="text-break">{{ post.title }}</td>
+              <td>{{ post.category.category_name }}</td>
+              <td>{{ post.author }}</td>
+              <td>
+                <span class="badge bg-info text-dark">
+                  {{ post.status }}
+                </span>
+              </td>
+
+              <td>
+                {% if post.is_featured %}
+                  <i class="fas fa-check text-success"></i>
+                {% else %}
+                  <i class="fas fa-times text-danger"></i>
+                {% endif %}
+              </td>
+
+              <td>
+                <div class="d-flex gap-2">
+                  <a href="{% url 'edit_post' post.id %}" class='mx-4'>
+                    <i class="fas fa-edit text-success"></i>
+                  </a>
+                  <a href="{% url 'delete_post' post.id %}">
+                    <i class="fas fa-trash text-danger"></i>
+                  </a>
+                </div>
+              </td>
+
+            </tr>
+            {% endfor %}
+          </tbody>
+
+        </table>
+      </div>
+
+      {% else %}
+        <h5 class="text-danger mt-4">
+          You can't see this page
+        </h5>
+      {% endif %}
+
+    </div>
+
   </div>
- 
 </div>
+
 {% endblock %}
