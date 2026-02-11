@@ -1,4 +1,6 @@
-{% extends 'base.html' %} {% block content %} {% load crispy_forms_tags %}
+{% extends 'base.html' %} 
+{% block content %} 
+{% load crispy_forms_tags %}
 
 <div class="row">
   <!-- Left Side bar -->
@@ -7,16 +9,16 @@
 
   <!-- Right side content -->
   <div class="col-md-9">
-    {% if perms.blogs.change_blog %}
+    {% if perms.auth.view_user %}
     <h2>Edit Post</h2>
     <form
-      action="{% url 'edit_post' post.id %}"
+      action="{% url 'edit_user' user.id %}"
       method="POST"
       class="form-control mb-3"
-      
     >
-      {% csrf_token %} {{form | crispy}}
-      <button type="submit" class="btn btn-warning">Edit Post</button>
+      {% csrf_token %} 
+      {{form | crispy}}
+      <button type="submit" class="btn btn-warning">Edit User</button>
       <br />
     </form>
   </div>

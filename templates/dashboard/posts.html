@@ -7,6 +7,7 @@
 
   <!-- Right side content -->
   <div class="col-md-9">
+    {% if perms.blogs.view_blog %}
     <h2>All Posts</h2>
 
     {% if messages %} {% for message in messages %}
@@ -55,6 +56,10 @@
         {% endfor %}
       </tbody>
     </table>
+     {% else %}
+  <h5 class='text-danger'>You cant see this page</h5>
+  {% endif %}
   </div>
+ 
 </div>
 {% endblock %}

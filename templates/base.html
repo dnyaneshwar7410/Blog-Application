@@ -42,7 +42,7 @@
             <a class="btn btn-sm btn-outline-secondary" href="{% url 'register' %}">Register</a>
             {% else %}
             <span><a href="{% url 'dashboard' %}" class='btn btn-warning'>Dashboard</a></span> &nbsp;&nbsp;&nbsp;
-            <span><a href="{% url 'logout' %}" class='btn btn-danger'>Logput</a></span>
+            <span><a href="{% url 'logout' %}" class='btn btn-danger'>Logout</a></span>
             {% endif %}
           </div>
         </div>
@@ -62,7 +62,7 @@
 {% endblock %}
 
 <!-- Footer part-->
- <footer class="blog-footer">
+ <footer class="blog-footer mt-4">
       <p>Django blog built with ❤️ by <a href="#">Dnyaneshwar Parkhe</a></p>
     </footer>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>

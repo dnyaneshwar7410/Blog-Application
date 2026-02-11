@@ -7,6 +7,7 @@
 
   <!-- Right side content -->
   <div class="col-md-9">
+    {% if perms.blogs.view_category %}
     <h2>All Categories</h2>
     <a
       href="{% url 'add_category' %}"
@@ -43,6 +44,9 @@
         {% endfor %}
       </tbody>
     </table>
+    {% else %}
+    <h5>You are not able to see this page</h5>
+    {% endif %}
   </div>
 </div>
 {% endblock %}
